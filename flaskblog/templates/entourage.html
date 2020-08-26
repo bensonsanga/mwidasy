@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <header class="page-header" id="maincontent">
+
+      <h1>Articles
+            </h1>
+        <p class="page-intro-p bold-underline-links">C'mon in. Make yourself at home. Stay a while. Other things welcoming people say. Just starting out? Check out our <a href="/guides/beginner/">beginner's guide</a>.</p>
+
+      <div class="page-header-top-nav">
+
+        <div class="page-header-top-nav-inside top-nav-archives">
+
+          <form id="select-navigator" class="select-navigator" action="">
+            <select name="select-navigator-select" id="select-navigator-select" class="custom-select">
+              <option value="/archives/">Top Tags</option>
+              <option value='/svg/'>Rhino</option><option value='/javascript/'>Grasshopper</option><option value='/wordpress/'>Autocad</option><option value='/jquery/'>Revit</option><option value='/react/'>react</option><option value='/accessibility/'>accessibility</option><option value='/animation/'>animation</option><option value='/performance/'>performance</option><option value='/css-2/'>CSS</option><option value='/vue/'>vue</option><option value='/typography/'>typography</option><option value='/forms/'>forms</option><option value='/grid/'>grid</option><option value='/custom-properties/'>custom properties</option><option value='/css-grid/'>css grid</option><option value='/responsive-images/'>responsive images</option><option value='/sass/'>Sass</option><option value='/css-variables/'>css variables</option><option value='/serverless/'>serverless</option><option value='/responsive/'>responsive</option>        </select>
+          </form>
+
+          <span class="number-of-articles">
+            3925 Articles
+          </span>
+
+          <button class="button-invisible sorting-button" id="sorting-button">
+            Sorting <span class="down-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-arrow-right">
+    <path d="M7 12.5L23 12.5" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M1 12.5H2" stroke="url(#paint1_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M17.5 7L23 12.5L17.5 18" stroke="url(#paint2_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <defs>
+    <linearGradient id="paint0_linear" x1="10.7498" y1="12.5" x2="11.3447" y2="9.73465" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF8A00"/>
+    <stop offset="1" stop-color="#DA1B60"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="1.23436" y1="12.5" x2="2.00945" y2="12.2748" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF8A00"/>
+    <stop offset="1" stop-color="#DA1B60"/>
+    </linearGradient>
+    <linearGradient id="paint2_linear" x1="18.789" y1="17.9995" x2="23.3162" y2="17.3419" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF8A00"/>
+    <stop offset="1" stop-color="#DA1B60"/>
+    </linearGradient>
+    </defs>
+    </svg>
+    </span>
+          </button>
+
+          <form action="" id="sorting-controls" class="sorting-controls">
+            {<br>
+            <label for="order">&nbsp;&nbsp;'order' => &nbsp;</label>
+            <select name="order" id="order" class="custom-select">
+              <option selected
+                            value="DESC">DESC</option>
+              <option             value="ASC">ASC</option>
+            </select>,<br>
+            <label for="orderby">&nbsp;&nbsp;'orderby' => </label>
+            <select name="orderby" id="orderby" class="custom-select">
+              <option             value="date">date</option>
+              <option             value="modified">modified</option>
+              <option             value="rand">rand</option>
+              <option             value="comment_count">comment_count</option>
+            </select>
+            <br>
+            }
+          </form>
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <div class="popular-articles">
+      <header class="popular-header header-card white-underline-links">
+        <h2 class="header-card-title">
+          Popular <br>this <br>month
+        </h2>
+        <p class="header-card-sponsor">Made by<br>
+          <a href="https://ymcmbennie.github.io/portfolio/">Members</a>
+        </p>
+          </header>
+
+      <div class="mini-card-grid">
+
+        {% for article in articles %}
+        <article class="mini-card module module-article article" id="mini-post-281191">
+
+          <header class="mini-article-card-header">
+
+            <div class="mini-article-card-title">
+
+              <div class="mini-article-subhead">
+                          {{ article.type }}
+
+                <time datetime="2019-02-07">
+                  {{ article.date_posted }}        </time>
+              </div>
+
+              <h2 class="">
+                <a href={{ article.link }} class="article-card-header read-article">
+                  {{ article.title }}        </a>
+              </h2>
+
+            </div>
+
+          </header>
+
+          <div class="mini-article-meta">
+
+            <div class="mini-article-byline">
+              <div class="author-avatar">
+                <a class="author-name" href={{ article.link }}>
+                  <img alt="" src={{ article.img }} srcset={{ article.img }} class="avatar avatar-80 photo" height="80" width="80">        </a>
+                <svg class="half-circle" width="80px" height="80px">
+                  <use xlink:href="#half-circle"></use>
+                </svg>
+              </div>
+              <div class="author-name-area">
+                <div class="author-name-prefix">
+                  Author
+                </div>
+                <a class="author-name" href="/author/chriscoyier/">
+                  {{ article.author }}        </a>
+              </div>
+            </div>
+
+                  <div class="tags">
+                <a href="/tag/learning/" rel="tag">{{ article.tags }}</a>      </div>
+
+          </div>
+
+        </article>
+        {% endfor %}
+
+          </div>
+
+    </div>
+
+    <div class="post-a-job">
+      <a href="{{ url_for('main.new_article') }}" class="button">New article</a>
+      <br><br>
+      ... over on the <a href="https://codepen.io/Projects/">CC-Resources Article Board</a>, which places the aticle here and on <a href="https://shoptalkshow.com/jobs">CC-Resources</a>.
+    </div>
+
+{% endblock content %}
